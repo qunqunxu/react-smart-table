@@ -14,9 +14,9 @@ const propTypes = {
   ]),
 };
 
-const getDisplayName = (el) => {
-  return el && el.type && (el.type.displayName || el.type.name);
-};
+const getDisplayName = (el) => (
+  el && el.type && (el.type.displayName || el.type.name)
+);
 
 const hasNames = (columns) => {
   let result = false;
@@ -46,8 +46,8 @@ const getStyle = ({ width, align }) => {
   return style;
 };
 
-const renderThs = (columns) => {
-  return columns.map((col, index) => {
+const renderThs = (columns) => (
+  columns.map((col, index) => {
     const { name, dataKey, th } = col.props;
     const props = { name, dataKey, colIndex: index };
     let content;
@@ -58,6 +58,7 @@ const renderThs = (columns) => {
       className = getDisplayName(th);
     } else if (isFunction(th)) {
       content = th(props);
+      className = th.name;
     } else {
       content = name || '';
     }
@@ -71,11 +72,11 @@ const renderThs = (columns) => {
         {content}
       </th>
     );
-  });
-};
+  })
+);
 
-const renderTds = (data, entry, columns, rowIndex) => {
-  return columns.map((col, index) => {
+const renderTds = (data, entry, columns, rowIndex) => (
+  columns.map((col, index) => {
     const { dataKey, td } = col.props;
     const value = entry[dataKey];
     const props = { data, rowData: entry, tdValue: value, dataKey, rowIndex, colIndex: index };
@@ -102,8 +103,8 @@ const renderTds = (data, entry, columns, rowIndex) => {
         {content}
       </td>
     );
-  });
-};
+  })
+);
 
 const renderRows = (data, columns) => {
   if (!data || !data.length) {return null;}
@@ -118,7 +119,7 @@ const renderRows = (data, columns) => {
 };
 
 function Table(props) {
-  const { children, data, className, hasError } = props;
+  const { children, data, className } = props;
   const columns = findAllByType(children, Column);
 
   return (

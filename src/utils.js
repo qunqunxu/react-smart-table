@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const findAllByType = (children, type) => {
-  let result = [];
+  const result = [];
   const targetType = type && (type.displayName || type.name);
 
   React.Children.forEach(children, child => {
@@ -16,7 +16,7 @@ export const findAllByType = (children, type) => {
 export const isObject = (value) => {
   const type = typeof value;
 
-  return !!value && (type == 'object' || type == 'function');
+  return !!value && (type === 'object' || type === 'function');
 };
 
 export const isFunction = (value) => {
